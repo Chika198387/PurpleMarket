@@ -5,15 +5,11 @@
 }
 
 .body {
-    background-color: #10002B;
     font-family: 'Montserrat', sans-serif;
     /* display: flex;
     justify-content: center;    */
-    height: 200vh;
     max-width: 100vw;
     overflow-x: hidden;
-    padding-left: 10vw;
-    padding-right: 10vw;
 }
 
 
@@ -134,13 +130,13 @@
 
 .section-2 {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: #10002B;
-    padding-top: 10vh;
     display: flex;
     flex-direction: column;
     gap: 10vh;
-    padding-bottom: 10vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .img {
@@ -148,7 +144,7 @@
     height: 40vh;
 }
 
-.kartochka {
+.section-2 .kartochka {
     display: flex;
     gap: 2vw;
     align-items: center;
@@ -162,5 +158,37 @@
 }
 
 .text3 {
-    text-align: center;
+    text-align: left;
+}
+
+.section-3 {
+    background-color: white;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6vh;
+}
+
+.text4 {
+    color: #10002B;
+    /* font-weight: 700; */
+}
+
+.section-3 .kartochka {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+    background-color: #9D4EDD;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.kartochki {
+    display: flex;
+    gap: 4vw;
+    margin-top: 30px;
 }
