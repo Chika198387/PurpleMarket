@@ -1,26 +1,404 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <link rel="stylesheet" href="catalog.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Каталог | Springlock Suits</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body class="body">
     <div class="header">
         <h1 class="logo">Purple Market</h1>
 
-        <input class="search" type="text" placeholder="Найти товары">
+        <input class="search" type="text" placeholder="Найти костюм...">
 
         <div class="links">
             <a class="a" href="index.html">Главная</a>
-            <a class="a" href="catalog.html">Каталог</a>
-            <a class="a" href="">Корзина</a>
-            <a class="a" href="">Профиль</a>
+            <a class="a active" href="catalog.html">Каталог</a>
+            <a class="a" href="#">Корзина <span class="cart-badge">3</span></a>
+            <a class="a" href="#">Профиль</a>
         </div>
     </div>
+
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="catalog.html">Каталог</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Пружинные костюмы</span>
+    </div>
+
+    <!-- Заголовок и сортировка -->
+    <div class="catalog-top">
+        <h2 class="catalog-title">
+            Пружинные костюмы
+            <span class="item-count">12 товаров</span>
+        </h2>
+        <div class="sort-wrapper">
+            <span class="sort-label">Сортировка:</span>
+            <select class="sort-select">
+                <option value="popular">По популярности</option>
+                <option value="price-asc">Цена: по возрастанию</option>
+                <option value="price-desc">Цена: по убыванию</option>
+                <option value="rating">По рейтингу</option>
+                <option value="new">Новинки</option>
+            </select>
+            <div class="view-toggle">
+                <button class="view-btn active" title="Сетка">⊞</button>
+                <button class="view-btn" title="Список">≡</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент: фильтры + сетка товаров -->
+    <div class="catalog-layout">
+        <!-- Боковая панель фильтров -->
+        <aside class="filters">
+            <div class="filter-block">
+                <h3 class="filter-title">Категории</h3>
+                <ul class="filter-list">
+                    <li><label class="filter-check"><input type="checkbox" checked> Springlock Classic</label></li>
+                    <li><label class="filter-check"><input type="checkbox" checked> Deluxe Edition</label></li>
+                    <li><label class="filter-check"><input type="checkbox"> Limited Edition</label></li>
+                    <li><label class="filter-check"><input type="checkbox"> Restoration Kits</label></li>
+                </ul>
+            </div>
+
+            <div class="filter-block">
+                <h3 class="filter-title">Цена, ₽</h3>
+                <div class="price-range">
+                    <input type="number" class="price-input" placeholder="от 15000" value="15000">
+                    <span class="price-dash">—</span>
+                    <input type="number" class="price-input" placeholder="до 50000" value="50000">
+                </div>
+            </div>
+
+            <div class="filter-block">
+                <h3 class="filter-title">Рейтинг</h3>
+                <ul class="filter-list">
+                    <li><label class="filter-check"><input type="radio" name="rating" checked> Любой</label></li>
+                    <li><label class="filter-check stars-filter"><input type="radio" name="rating"> ★★★★☆ <span>от 4</span></label></li>
+                    <li><label class="filter-check stars-filter"><input type="radio" name="rating"> ★★★★★ <span>5</span></label></li>
+                </ul>
+            </div>
+
+            <div class="filter-block">
+                <label class="filter-check toggle-label">
+                    <input type="checkbox" checked>
+                    <span class="toggle-switch"></span>
+                    Только в наличии
+                </label>
+            </div>
+
+            <button class="filter-apply">Применить фильтры</button>
+            <button class="filter-reset">Сбросить</button>
+        </aside>
+
+        <!-- Сетка товаров -->
+        <main class="products-grid" id="productsGrid">
+            <!-- Карточка 1 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image2" style="background: linear-gradient(145deg, #2D1040 0%, #3D1A55 40%, #5B2D7A 100%);">
+                        <img src="https://avatars.mds.yandex.net/i?id=3c8444136133804bf10d3eeb27ead9ef_l-4120546-images-thumbs&n=13" alt="">
+                    </div>
+                    <span class="badge badge-hit">Хит</span>
+                    <span class="badge badge-discount">-15%</span>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">4.9 (342)</span>
+                    </p>
+                    <h3 class="card-name">Spring Bonnie Classic</h3>
+                    <p class="card-desc">Оригинальный пружинный механизм • Ручная работа</p>
+                    <div class="card-price-block">
+                        <span class="card-price">24 990 ₽</span>
+                        <span class="card-old-price">29 400 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #1A0830 0%, #2D1445 40%, #4A2068 100%);">
+                        <img src="https://i.pinimg.com/originals/de/61/45/de6145ea5c075a3973337f6daa664766.png" alt="">
+                    </div>
+                    <span class="badge badge-new">Новинка</span>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">4.7 (189)</span>
+                    </p>
+                    <h3 class="card-name">Fredbear Original</h3>
+                    <p class="card-desc">Золотой корпус • Усиленный каркас</p>
+                    <div class="card-price-block">
+                        <span class="card-price">29 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image2" style="background: linear-gradient(145deg, #200B2E 0%, #3A1D30 40%, #5C2D3E 100%);">
+                        <img src="https://i.ytimg.com/vi/x2kyxXucwGw/maxresdefault.jpg" alt="">
+                    </div>
+                    <span class="badge badge-discount">-20%</span>
+                    <button class="fav-btn active" title="В избранном">♥</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">5.0 (517)</span>
+                    </p>
+                    <h3 class="card-name">Springtrap Replica</h3>
+                    <p class="card-desc">Состаренный вид • Реалистичные детали</p>
+                    <div class="card-price-block">
+                        <span class="card-price">34 990 ₽</span>
+                        <span class="card-old-price">43 740 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 4 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image2" style="background: linear-gradient(145deg, #261240 0%, #3B1F55 40%, #5C3178 100%);">
+                        <img src="https://i.pinimg.com/736x/04/45/1c/04451cd1c22bb0f4e6be7841964cc54b.jpg" alt="">
+                    </div>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">4.5 (96)</span>
+                    </p>
+                    <h3 class="card-name">Golden Freddy Suit</h3>
+                    <p class="card-desc">Позолоченное покрытие • Мягкая обивка</p>
+                    <div class="card-price-block">
+                        <span class="card-price">27 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 5 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #1F0B35 0%, #321A4A 40%, #502870 100%);">
+                        <span class="card-emoji">🐰👑</span>
+                    </div>
+                    <span class="badge badge-hit">Хит</span>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">4.8 (274)</span>
+                    </p>
+                    <h3 class="card-name">Spring Bonnie Deluxe</h3>
+                    <p class="card-desc">Премиум материалы • Подсветка глаз</p>
+                    <div class="card-price-block">
+                        <span class="card-price">39 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 6 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #0E0520 0%, #1E0E35 40%, #351D50 100%);">
+                        <span class="card-emoji">🐻🌑</span>
+                    </div>
+                    <span class="badge badge-new">Новинка</span>
+                    <span class="badge badge-discount">-10%</span>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">4.6 (63)</span>
+                    </p>
+                    <h3 class="card-name">Fredbear Dark Edition</h3>
+                    <p class="card-desc">Чёрное покрытие • Красные акценты</p>
+                    <div class="card-price-block">
+                        <span class="card-price">31 990 ₽</span>
+                        <span class="card-old-price">35 540 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 7 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #261038 0%, #3A1D50 40%, #582D72 100%);">
+                        <span class="card-emoji">🐰🎸</span>
+                    </div>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">4.4 (148)</span>
+                    </p>
+                    <h3 class="card-name">Classic Bonnie</h3>
+                    <p class="card-desc">Синий корпус • Лёгкая конструкция</p>
+                    <div class="card-price-block">
+                        <span class="card-price">19 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 8 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #281535 0%, #3E2248 40%, #5D3465 100%);">
+                        <span class="card-emoji">🐤</span>
+                    </div>
+                    <span class="badge badge-discount">-25%</span>
+                    <button class="fav-btn active" title="В избранном">♥</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">4.3 (89)</span>
+                    </p>
+                    <h3 class="card-name">Chica Spring Suit</h3>
+                    <p class="card-desc">Яркий дизайн • Клюв на пружине</p>
+                    <div class="card-price-block">
+                        <span class="card-price">22 990 ₽</span>
+                        <span class="card-old-price">30 650 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 9 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #1C0E30 0%, #2E1948 40%, #4A2668 100%);">
+                        <span class="card-emoji">🦊</span>
+                    </div>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">4.9 (231)</span>
+                    </p>
+                    <h3 class="card-name">Foxy Springlock</h3>
+                    <p class="card-desc">Крюк в комплекте • Красный корпус</p>
+                    <div class="card-price-block">
+                        <span class="card-price">25 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 10 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #241035 0%, #381D4E 40%, #563070 100%);">
+                        <span class="card-emoji">🦊🌀</span>
+                    </div>
+                    <span class="badge badge-hit">Хит</span>
+                    <span class="badge badge-new">Новинка</span>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">4.6 (175)</span>
+                    </p>
+                    <h3 class="card-name">The Mangle Special</h3>
+                    <p class="card-desc">Разборная конструкция • Уникальный стиль</p>
+                    <div class="card-price-block">
+                        <span class="card-price">28 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 11 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #200D38 0%, #331B4E 40%, #4F2A70 100%);">
+                        <span class="card-emoji">🎈</span>
+                    </div>
+                    <button class="fav-btn" title="В избранное">♡</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★☆☆</span>
+                        <span class="reviews">3.8 (52)</span>
+                    </p>
+                    <h3 class="card-name">Balloon Boy Spring</h3>
+                    <p class="card-desc">Компактный размер • Воздушные шары</p>
+                    <div class="card-price-block">
+                        <span class="card-price">15 990 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+
+            <!-- Карточка 12 -->
+            <div class="product-card">
+                <div class="card-image-wrapper">
+                    <div class="card-image" style="background: linear-gradient(145deg, #18092E 0%, #2A1545 40%, #452565 100%);">
+                        <span class="card-emoji">🎭</span>
+                    </div>
+                    <span class="badge badge-discount">-30%</span>
+                    <button class="fav-btn active" title="В избранном">♥</button>
+                </div>
+                <div class="card-info">
+                    <p class="card-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">5.0 (403)</span>
+                    </p>
+                    <h3 class="card-name">Puppet Master Suit</h3>
+                    <p class="card-desc">Чёрно-белый дизайн • Полосы на корпусе</p>
+                    <div class="card-price-block">
+                        <span class="card-price">44 990 ₽</span>
+                        <span class="card-old-price">64 270 ₽</span>
+                    </div>
+                    <button class="add-to-cart">🛒 В корзину</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Пагинация -->
+    <div class="pagination">
+        <button class="page-btn prev" disabled>← Назад</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <span class="page-dots">...</span>
+        <button class="page-btn">8</button>
+        <button class="page-btn next">Вперёд →</button>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
 </body>
 </html>
