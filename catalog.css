@@ -557,6 +557,10 @@
     top: 38px;
 }
 
+.badge-new + .badge-discount {
+    top: 38px;
+}
+
 /* Кнопка избранного */
 .fav-btn {
     position: absolute;
