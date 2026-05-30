@@ -1,0 +1,138 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="profile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль | Purple Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="logo">Purple Market</h1>
+        <input class="search" type="text" placeholder="Найти костюм...">
+        <div class="links">
+            <a class="a" href="index.html">Главная</a>
+            <a class="a" href="catalog.html">Каталог</a>
+            <a class="a" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a active" href="profile.html">Профиль</a>
+        </div>
+    </div>
+
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Профиль</span>
+    </div>
+
+    <div class="profile-layout">
+        <!-- Боковая панель -->
+        <aside class="profile-sidebar">
+            <div class="profile-avatar">🐻</div>
+            <h2 class="profile-username">Майкл Афтон</h2>
+            <nav class="profile-nav">
+                <a href="#" class="profile-nav-link active">Личные данные</a>
+                <a href="#" class="profile-nav-link">Мои заказы</a>
+                <a href="#" class="profile-nav-link">Избранное</a>
+                <a href="#" class="profile-nav-link">Адреса доставки</a>
+                <a href="#" class="profile-nav-link logout">Выйти</a>
+            </nav>
+        </aside>
+
+        <!-- Основной контент -->
+        <main class="profile-content">
+            <!-- Секция личных данных -->
+            <section class="profile-section">
+                <h2 class="section-title">Личные данные</h2>
+                <form class="profile-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="firstName">Имя</label>
+                            <input type="text" id="firstName" class="form-input" value="Майкл">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="lastName">Фамилия</label>
+                            <input type="text" id="lastName" class="form-input" value="Афтон">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" class="form-input" value="michael.afton@fazbear.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Телефон</label>
+                        <input type="tel" id="phone" class="form-input" value="+7 (999) 123-45-67">
+                    </div>
+                    <button type="submit" class="save-btn">Сохранить изменения</button>
+                </form>
+            </section>
+
+            <!-- Секция с заказами -->
+            <section class="profile-section">
+                <h2 class="section-title">Мои заказы</h2>
+                <div class="orders-list">
+                    <!-- Заказ 1 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">№FNAF-2847</span>
+                            <span class="order-date">12.05.2025</span>
+                            <span class="order-status delivered">Доставлен</span>
+                        </div>
+                        <div class="order-items">
+                            <span class="order-item">Spring Bonnie Classic ×1</span>
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-total">24 990 ₽</span>
+                            <a href="#" class="order-details-link">Подробнее →</a>
+                        </div>
+                    </div>
+
+                    <!-- Заказ 2 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">№FNAF-2812</span>
+                            <span class="order-date">03.05.2025</span>
+                            <span class="order-status processing">В обработке</span>
+                        </div>
+                        <div class="order-items">
+                            <span class="order-item">Fredbear Original ×1</span>
+                            <span class="order-item">Springtrap Replica ×1</span>
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-total">64 980 ₽</span>
+                            <a href="#" class="order-details-link">Подробнее →</a>
+                        </div>
+                    </div>
+
+                    <!-- Заказ 3 (отменён) -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">№FNAF-2790</span>
+                            <span class="order-date">28.04.2025</span>
+                            <span class="order-status cancelled">Отменён</span>
+                        </div>
+                        <div class="order-items">
+                            <span class="order-item">Chica Spring Suit ×1</span>
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-total">22 990 ₽</span>
+                            <a href="#" class="order-details-link">Подробнее →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
+</body>
+</html>

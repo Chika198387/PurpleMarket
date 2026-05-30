@@ -1,0 +1,135 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина | Purple Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="logo">Purple Market</h1>
+        <input class="search" type="text" placeholder="Найти костюм...">
+        <div class="links">
+            <a class="a" href="index.html">Главная</a>
+            <a class="a" href="catalog.html">Каталог</a>
+            <a class="a active" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a" href="profile.html">Профиль</a>
+        </div>
+    </div>
+
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="catalog.html">Каталог</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Корзина</span>
+    </div>
+
+    <h1 class="cart-title">
+        Корзина
+        <span class="item-count-text">(3 товара)</span>
+    </h1>
+
+    <!-- Основной блок корзины -->
+    <div class="cart-layout">
+        <!-- Список товаров -->
+        <div class="cart-items">
+            <!-- Товар 1 -->
+            <div class="cart-item">
+                <div class="item-image">
+                    <img class="img" src="https://avatars.mds.yandex.net/i?id=3c8444136133804bf10d3eeb27ead9ef_l-4120546-images-thumbs&n=13" alt="">
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Spring Bonnie Classic</span>
+                    <span class="item-meta">Оригинальный пружинный механизм</span>
+                    <span class="item-price">24 990 ₽</span>
+                </div>
+                <div class="quantity-control">
+                    <button class="qty-btn">−</button>
+                    <input type="number" class="qty-input" value="2" min="1" max="10">
+                    <button class="qty-btn">+</button>
+                </div>
+                <div class="item-total">49 980 ₽</div>
+                <button class="remove-btn" title="Удалить">🗑️</button>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="cart-item">
+                <div class="item-image">
+                    <img class="img" src="https://i.ytimg.com/vi/x2kyxXucwGw/maxresdefault.jpg" alt="">
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Springtrap Replica</span>
+                    <span class="item-meta">Состаренный вид • Реалистичные детали</span>
+                    <span class="item-price">34 990 ₽</span>
+                </div>
+                <div class="quantity-control">
+                    <button class="qty-btn">−</button>
+                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                    <button class="qty-btn">+</button>
+                </div>
+                <div class="item-total">34 990 ₽</div>
+                <button class="remove-btn" title="Удалить">🗑️</button>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="cart-item">
+                <div class="item-image">
+                    <img class="img" src="https://i.pinimg.com/originals/de/61/45/de6145ea5c075a3973337f6daa664766.png" alt="">
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Fredbear Original</span>
+                    <span class="item-meta">Золотой корпус • Усиленный каркас</span>
+                    <span class="item-price">29 990 ₽</span>
+                </div>
+                <div class="quantity-control">
+                    <button class="qty-btn">−</button>
+                    <input type="number" class="qty-input" value="1" min="1" max="10">
+                    <button class="qty-btn">+</button>
+                </div>
+                <div class="item-total">29 990 ₽</div>
+                <button class="remove-btn" title="Удалить">🗑️</button>
+            </div>
+        </div>
+
+        <!-- Итоговая панель -->
+        <div class="cart-summary">
+            <div class="summary-title">Ваш заказ</div>
+            <div class="summary-row">
+                <span>Стоимость товаров</span>
+                <span>114 960 ₽</span>
+            </div>
+            <div class="summary-row total">
+                <span>Итого</span>
+                <span class="summary-value">114 960 ₽</span>
+            </div>
+            <div class="promo-code">
+                <input type="text" class="promo-input" placeholder="Промокод">
+                <button class="promo-btn">Применить</button>
+            </div>
+            <button class="checkout-btn">Перейти к оформлению</button>
+            <a href="catalog.html" class="continue-shopping">← Продолжить покупки</a>
+        </div>
+    </div>
+
+    <!-- Пустая корзина (скрыта по умолчанию) -->
+    <div class="empty-cart">
+        <div class="empty-icon">🛒💨</div>
+        <div class="empty-text">Ваша корзина пуста</div>
+        <div class="empty-sub">Пружинные механизмы ждут своего владельца</div>
+        <a href="catalog.html" class="continue-shopping">Перейти в каталог</a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
+</body>
+</html>
