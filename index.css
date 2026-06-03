@@ -136,7 +136,9 @@
     flex-direction: column;
     gap: 10vh;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 10vw;
+    padding-top: 10px;   /* ← новая строка */
 }
 
 .img {
@@ -268,6 +270,16 @@
     transform: rotate(18deg);
     pointer-events: none;   /* чтобы не мешала кликам */
     z-index: 1;
+}
+
+.tittle2 {
+    position: static;   /* или удалить этот блок, если нет других стилей */
+}
+
+.section-2 .text5 {
+    position: static;
+    text-align: left;
+    margin: 0;
 }
 
 /* Адаптация для мобильных (по желанию) */
