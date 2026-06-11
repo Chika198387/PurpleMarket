@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное | Purple Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="favourites.css">
+</head>
+<body>
+
+    <!-- Хедер (как на странице профиля) -->
+    <div class="header">
+        <h1 class="logo">Purple Market</h1>
+        <input class="search" type="text" placeholder="Найти костюм...">
+        <div class="links">
+            <a class="a" href="index.html">Главная</a>
+            <a class="a" href="catalog.html">Каталог</a>
+            <a class="a" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a active" href="profile.html">Профиль</a>
+        </div>
+    </div>
+
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="profile.html">Профиль</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Избранное</span>
+    </div>
+
+    <!-- Основная сетка (как в профиле, но без формы) -->
+    <div class="profile-layout">
+        <!-- Боковая панель с навигацией -->
+        <aside class="profile-sidebar">
+            <div class="profile-avatar">🐻</div>
+            <h2 class="profile-username">Майкл Афтон</h2>
+            <nav class="profile-nav">
+                <a href="#" class="profile-nav-link">Личные данные</a>
+                <a href="#" class="profile-nav-link">Мои заказы</a>
+                <a href="favourites.html" class="profile-nav-link active">Избранное</a>
+                <a href="#" class="profile-nav-link">Адреса доставки</a>
+                <a href="#" class="profile-nav-link">Пройти тест</a>
+                <a href="#" class="profile-nav-link logout">Выйти</a>
+            </nav>
+        </aside>
+
+        <!-- Основной контент – список избранных товаров -->
+        <main class="profile-content">
+            <section class="profile-section favourites-section">
+                <h2 class="section-title">
+                    ❤️ Избранное
+                    <span class="fav-count">(4 товара)</span>
+                </h2>
+
+                <div class="favourites-grid">
+                    <!-- Карточка 1 – Spring Bonnie -->
+                    <div class="fav-card">
+                        <div class="fav-card-img">
+                            <img src="https://images.steamusercontent.com/ugc/172662938584917014/082CF595B492CC86F9A8F0850E777E66A0B4F3CD/?imw=512&amp;imh=287&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true" alt="Spring Bonnie">
+                            <button class="fav-remove" title="Удалить из избранного">✕</button>
+                        </div>
+                        <div class="fav-card-body">
+                            <h3 class="fav-title">Spring Bonnie Classic</h3>
+                            <p class="fav-description">Оригинальный механизм 83-го. Свет в глазах. Качество, от которого мурашки.</p>
+                            <div class="fav-price">24 990 ₽</div>
+                            <div class="fav-actions">
+                                <button class="fav-cart-btn">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 2 – Fredbear -->
+                    <div class="fav-card">
+                        <div class="fav-card-img">
+                            <img src="https://avatars.mds.yandex.net/i?id=fe11b6f876c76fef0c1f938e11efa0a7_l-4248462-images-thumbs&n=13" alt="Fredbear">
+                            <button class="fav-remove" title="Удалить из избранного">✕</button>
+                        </div>
+                        <div class="fav-card-body">
+                            <h3 class="fav-title">Fredbear Original</h3>
+                            <p class="fav-description">Микрофон, бабочка и цилиндр в комплекте. Костюм, который пахнет историей и сценой.</p>
+                            <div class="fav-price">39 990 ₽</div>
+                            <div class="fav-actions">
+                                <button class="fav-cart-btn">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 3 – Springtrap Replica -->
+                    <div class="fav-card">
+                        <div class="fav-card-img">
+                            <img src="https://i.pinimg.com/736x/02/d1/79/02d1798e78af1a3329ac4d2dbaa2a65c.jpg" alt="Springtrap Replica">
+                            <button class="fav-remove" title="Удалить из избранного">✕</button>
+                        </div>
+                        <div class="fav-card-body">
+                            <h3 class="fav-title">Springtrap Replica</h3>
+                            <p class="fav-description">Обожжённый, но живучий. Идеальный выбор для хоррор-косплея и фотосессий.</p>
+                            <div class="fav-price">44 990 ₽</div>
+                            <div class="fav-actions">
+                                <button class="fav-cart-btn">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 4 – Chica Spring Suit -->
+                    <div class="fav-card">
+                        <div class="fav-card-img">
+                            <img src="https://i.pinimg.com/736x/5c/35/02/5c35029bf7408a2d7f3d3d69a5de8c7e.jpg" alt="Chica Spring Suit">
+                            <button class="fav-remove" title="Удалить из избранного">✕</button>
+                        </div>
+                        <div class="fav-card-body">
+                            <h3 class="fav-title">Chica Spring Suit</h3>
+                            <p class="fav-description">С набором кухонных аксессуаров. Лучший друг любого пиццайолы.</p>
+                            <div class="fav-price">22 990 ₽</div>
+                            <div class="fav-actions">
+                                <button class="fav-cart-btn">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Сообщение, если избранное пусто (скрыто по умолчанию) -->
+                <div class="favourites-empty" style="display: none;">
+                    <span class="empty-icon">💔</span>
+                    <p>В избранном пока ничего нет</p>
+                    <a href="catalog.html" class="empty-link">Перейти в каталог</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
