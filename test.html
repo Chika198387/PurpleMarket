@@ -1,12 +1,242 @@
+<!-- test.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <link rel="stylesheet" href="test.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Тест | Purple Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="test.css">
 </head>
 <body>
-    
+    <!-- ХЕДЕР -->
+    <div class="header">
+        <h1 class="logo">Purple Market</h1>
+        <input class="search" type="text" placeholder="Найти костюм...">
+        <div class="links">
+            <a class="a" href="index.html">Главная</a>
+            <a class="a" href="catalog.html">Каталог</a>
+            <a class="a" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a active" href="profile.html">Профиль</a>
+        </div>
+    </div>
+
+    <!-- ХЛЕБНЫЕ КРОШКИ -->
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="profile.html">Профиль</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Тест</span>
+    </div>
+
+    <!-- ОСНОВНАЯ СЕТКА -->
+    <div class="test-layout">
+        <!-- БОКОВАЯ ПАНЕЛЬ -->
+        <aside class="profile-sidebar">
+            <div class="profile-avatar">🐻</div>
+            <h2 class="profile-username">Майкл Афтон</h2>
+            <nav class="profile-nav">
+                <a href="#" class="profile-nav-link">Личные данные</a>
+                <a href="pokypki.html" class="profile-nav-link">Мои покупки</a>
+                <a href="favourites.html" class="profile-nav-link">Избранное</a>
+                <a href="mini-game.html" class="profile-nav-link">Мини-игра</a>
+                <a href="test.html" class="profile-nav-link active">Пройти тест</a>
+                <a href="#" class="profile-nav-link logout">Выйти</a>
+            </nav>
+        </aside>
+
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
+        <main class="test-content">
+            <section class="test-section">
+                <h2 class="section-title">Тест на знание костюмов на пружинных фиксаторах</h2>
+                <p class="test-description">
+                    Узнайте, готовы ли вы носить пружинный костюм
+                </p>
+
+                <!-- Вопрос 1 -->
+                <div class="question-block">
+                    <h3 class="question-title">1. Что нельзя делать с пружинными замками?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a">
+                            Трогать их руками
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b">
+                            Лить на них воду
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c">
+                            Ничего из этого
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="d">
+                            Всё из этого
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 2 -->
+                <div class="question-block">
+                    <h3 class="question-title">2. Что происходит при сбое пружинного механизма на человеке?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="a">
+                            Костюм блокируется и его становится невозможно снять без разборки
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="b">
+                            Ничего
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="c">
+                            Костюм переключается в режим носки для эндоскелета, травмируя носителя
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="d">
+                            Включается аварийная система безопасности, что приводит к поломке костюма
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 3 -->
+                <div class="question-block">
+                    <h3 class="question-title">3. Как часто надо проверять пружинные механизмы?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a">
+                            Раз в месяц
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b">
+                            Перед каждым использованием
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c">
+                            Никогда
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="d">
+                            Только при сбоях пружин
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 4 -->
+                <div class="question-block">
+                    <h3 class="question-title">4. Какая основная опасность использования старых пружинных костюмов?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a">
+                            Потеря управления аниматроником
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b">
+                            Ржавчина и ослабление пружин
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c">
+                            Отсутствие инструкции
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="d">
+                            Плохая видимость изнутри
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 5 -->
+                <div class="question-block">
+                    <h3 class="question-title">5. Как чистить костюмы на пружинных фиксаторах?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q5" value="a">
+                            Разобрать и кинуть в стиральную машину
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="b">
+                            Сначала протереть всё влажной тряпкой, а потом сухой, чтоб вытереть
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="c">
+                            Отдать на чистку специалистам по таким костюмам
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="d">
+                            Костюмы нельзя чистить
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 6 -->
+                <div class="question-block">
+                    <h3 class="question-title">6. Где покупать костюмы на пружинных фиксаторах?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a">
+                            Только на сайтах с положительными отзывами
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b">
+                            Там, где они стоят дёшево
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="c">
+                            В магазинах с лицензией на это
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="d">
+                            Напрямую от ресторанов с аниматрониками
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Вопрос 7 -->
+                <div class="question-block">
+                    <h3 class="question-title">7. Что делать при нахождении пружинного костюма вне магазинов?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a">
+                            Оставить на месте
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b">
+                            Вызвать полицию
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="c">
+                            Взять себе
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="d">
+                            Вызвать наших специалистов и не рассказывать об этой находке
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Кнопки управления тестом -->
+                <div class="test-actions">
+                    <button class="btn-submit" type="button">Отправить ответы</button>
+                    <button class="btn-reset" type="reset">Сбросить</button>
+                </div>
+
+                <!-- Декоративный результат -->
+                <div class="test-result-placeholder">
+                    <p>После отправки здесь появится ваш результат.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
 </body>
 </html>
