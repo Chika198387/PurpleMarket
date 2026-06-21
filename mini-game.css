@@ -306,9 +306,9 @@ body {
     
     /* Базовый огненный фон */
     background: radial-gradient(ellipse at 50% 50%, rgba(255, 120, 0, 0.15) 0%, rgba(255, 60, 0, 0.05) 50%, transparent 80%);
-    box-shadow: 
+    /* box-shadow: 
         inset 0 0 80px 20px rgba(255, 80, 0, 0.15),
-        0 0 40px 10px rgba(255, 80, 0, 0.20);
+        0 0 40px 10px rgba(255, 80, 0, 0.20); */
 }
 
 /* Огненная обводка прямо на картинке */
@@ -332,14 +332,17 @@ body {
     content: '';
     position: absolute;
     inset: -15px;
-    border-radius: 25px;
+    border-radius: 50%;
     background: radial-gradient(ellipse at 30% 40%, rgba(255, 180, 50, 0.25) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(255, 100, 20, 0.20) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(200, 50, 0, 0.15) 0%, transparent 40%);
-    filter: blur(25px);
-    z-index: 1;
-    animation: fireGlow1 1.5s infinite alternate ease-in-out;
+                radial-gradient(ellipse at 70% 60%, rgba(255, 100, 20, 0.20) 0%, transparent 50%);
+    filter: blur(30px);
+    z-index: 0;
+    animation: fireGlow1 1.5s infinite alternate;
     pointer-events: none;
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
 }
 
 /* Мерцание огня - дополнительный слой */
