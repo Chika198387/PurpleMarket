@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мои покупки | Purple Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="pokypki.css" />
+</head>
+<body>
+    <!-- ===== ХЕДЕР (как на всех страницах) ===== -->
+    <div class="header">
+        <h1 class="logo">Purple Market</h1>
+        <input class="search" type="text" placeholder="Найти костюм..." />
+        <div class="links">
+            <a class="a" href="index.html">Главная</a>
+            <a class="a" href="catalog.html">Каталог</a>
+            <a class="a" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a active" href="profile.html">Профиль</a>
+        </div>
+    </div>
+
+    <!-- ===== ХЛЕБНЫЕ КРОШКИ ===== -->
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="profile.html">Профиль</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Мои покупки</span>
+    </div>
+
+    <!-- ===== ЗАГОЛОВОК ===== -->
+    <h1 class="page-title">
+        Мои покупки
+        <span class="item-count-text">(3 заказа)</span>
+    </h1>
+
+    <!-- ===== ОСНОВНАЯ СЕТКА (аналогично корзине) ===== -->
+    <div class="purchase-layout">
+        <!-- Список покупок -->
+        <div class="purchase-list">
+            <!-- Покупка 1 -->
+            <div class="purchase-item">
+                <div class="item-image">
+                    <img class="img" src="https://avatars.mds.yandex.net/i?id=3c8444136133804bf10d3eeb27ead9ef_l-4120546-images-thumbs&n=13" alt="Spring Bonnie" />
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Spring Bonnie Classic</span>
+                    <span class="item-meta">Оригинальный пружинный механизм</span>
+                    <span class="item-price">24 990 ₽</span>
+                    <div class="purchase-meta">
+                        <span class="purchase-date">📅 12.03.2025</span>
+                        <span class="purchase-status status-delivered">✅ Доставлен</span>
+                    </div>
+                </div>
+                <div class="purchase-actions">
+                    <button class="action-btn repeat-btn">🔄 Повторить</button>
+                    <button class="action-btn review-btn">✍️ Отзыв</button>
+                </div>
+            </div>
+
+            <!-- Покупка 2 -->
+            <div class="purchase-item">
+                <div class="item-image">
+                    <img class="img" src="https://i.ytimg.com/vi/x2kyxXucwGw/maxresdefault.jpg" alt="Springtrap" />
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Springtrap Replica</span>
+                    <span class="item-meta">Состаренный вид • Реалистичные детали</span>
+                    <span class="item-price">34 990 ₽</span>
+                    <div class="purchase-meta">
+                        <span class="purchase-date">📅 28.02.2025</span>
+                        <span class="purchase-status status-delivered">✅ Доставлен</span>
+                    </div>
+                </div>
+                <div class="purchase-actions">
+                    <button class="action-btn repeat-btn">🔄 Повторить</button>
+                    <button class="action-btn review-btn">✍️ Отзыв</button>
+                </div>
+            </div>
+
+            <!-- Покупка 3 -->
+            <div class="purchase-item">
+                <div class="item-image">
+                    <img class="img" src="https://i.pinimg.com/originals/de/61/45/de6145ea5c075a3973337f6daa664766.png" alt="Fredbear" />
+                </div>
+                <div class="item-details">
+                    <span class="item-name">Fredbear Original</span>
+                    <span class="item-meta">Золотой корпус • Усиленный каркас</span>
+                    <span class="item-price">29 990 ₽</span>
+                    <div class="purchase-meta">
+                        <span class="purchase-date">📅 05.02.2025</span>
+                        <span class="purchase-status status-delivered">✅ Доставлен</span>
+                    </div>
+                </div>
+                <div class="purchase-actions">
+                    <button class="action-btn repeat-btn">🔄 Повторить</button>
+                    <button class="action-btn review-btn">✍️ Отзыв</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Боковая панель со статистикой -->
+        <aside class="purchase-summary">
+            <div class="summary-title">💰 Статистика</div>
+            <div class="summary-row">
+                <span>Всего заказов</span>
+                <span>3</span>
+            </div>
+            <div class="summary-row">
+                <span>Потрачено</span>
+                <span class="summary-value">89 970 ₽</span>
+            </div>
+            <div class="summary-row">
+                <span>Доставлено</span>
+                <span>2</span>
+            </div>
+            <div class="summary-row">
+                <span>В пути</span>
+                <span>1</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Чек отправлен на почту')">📄 Скачать чек</button>
+            <a href="catalog.html" class="continue-shopping">← Продолжить покупки</a>
+        </aside>
+    </div>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
+</body>
+</html>

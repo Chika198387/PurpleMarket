@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="mini-game.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сожги Спрингтрапа | Purple Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ===== ХЕДЕР (из профиля) ===== -->
+    <div class="header">
+        <h1 class="logo">Purple Market</h1>
+        <input class="search" type="text" placeholder="Найти костюм...">
+        <div class="links">
+            <a class="a" href="index.html">Главная</a>
+            <a class="a" href="catalog.html">Каталог</a>
+            <a class="a" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a active" href="profile.html">Профиль</a>
+        </div>
+    </div>
+
+    <!-- ===== ХЛЕБНЫЕ КРОШКИ ===== -->
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="profile.html">Профиль</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Мини-игра</span>
+    </div>
+
+    <!-- ===== ОСНОВНАЯ СЕТКА (как в профиле) ===== -->
+    <div class="profile-layout">
+        <!-- Боковая панель (из профиля) -->
+        <aside class="profile-sidebar">
+            <div class="profile-avatar">🐻</div>
+            <h2 class="profile-username">Майкл Афтон</h2>
+            <nav class="profile-nav">
+                <a href="#" class="profile-nav-link">Личные данные</a>
+                <a href="pokupki.html" class="profile-nav-link">Мои покупки</a>
+                <a href="favourites.html" class="profile-nav-link">Избранное</a>
+                <a href="mini-game.html" class="profile-nav-link active">Мини-игра</a>
+                <a href="test.html" class="profile-nav-link">Пройти тест</a>
+                <a href="#" class="profile-nav-link logout">Выйти</a>
+            </nav>
+        </aside>
+
+        <!-- Основной контент (игра) -->
+        <main class="profile-content">
+            <div class="game-container">
+                <h2 class="title">Сожги Спрингтрапа!</h2>
+                <div class="sub">Каждый клик — ещё одна степень ожога</div>
+
+                <div class="springtrap-area" id="clickArea">
+                    <img class="img" src="./img/springtrap.png" alt="Спрингтрап">
+                </div>
+  
+                <button class="button" id="fireButton">Сжечь!</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== ФУТЕР (из профиля) ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Purple Market — пружинные костюмы из вселенной FNAF</p>
+            <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
+        </div>
+    </footer>
+</body>
+</html>
