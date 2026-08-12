@@ -13,12 +13,12 @@
     <div class="header">
         <h1 class="logo">Purple Market</h1>
 
-        <input class="search" type="text" placeholder="Найти костюм...">
+        <input class="search" id="search" type="text" placeholder="Найти костюм...">
 
         <div class="links">
             <a class="a" href="index.html">Главная</a>
             <a class="a active" href="catalog.html">Каталог</a>
-            <a class="a" href="cart.html">Корзина <span class="cart-badge">3</span></a>
+            <a class="a" href="cart.html">Корзина <span class="cart-badge" id="cartBadge">3</span></a>
             <a class="a" href="profile.html">Профиль</a>
         </div>
     </div>
@@ -36,11 +36,11 @@
     <div class="catalog-top">
         <h2 class="catalog-title">
             Пружинные костюмы
-            <span class="item-count">12 товаров</span>
+            <span class="item-count" id="itemCount">12 товаров</span>
         </h2>
         <div class="sort-wrapper">
             <span class="sort-label">Сортировка:</span>
-            <select class="sort-select">
+            <select class="sort-select" id="sortSelect">
                 <option value="popular">По популярности</option>
                 <option value="price-asc">Цена: по возрастанию</option>
                 <option value="price-desc">Цена: по убыванию</option>
@@ -48,8 +48,8 @@
                 <option value="new">Новинки</option>
             </select>
             <div class="view-toggle">
-                <button class="view-btn active" title="Сетка">⊞</button>
-                <button class="view-btn" title="Список">≡</button>
+                <button class="view-btn active" id="gridViewBtn" title="Сетка">⊞</button>
+                <button class="view-btn" id="listViewBtn" title="Список">≡</button>
             </div>
         </div>
     </div>
@@ -57,45 +57,45 @@
     <!-- Основной контент: фильтры + сетка товаров -->
     <div class="catalog-layout">
         <!-- Боковая панель фильтров -->
-        <aside class="filters">
+        <aside class="filters" id="filtersPanel">
             <div class="filter-block">
                 <h3 class="filter-title">Категории</h3>
-                <ul class="filter-list">
-                    <li><label class="filter-check"><input type="checkbox" checked> Springlock Classic</label></li>
-                    <li><label class="filter-check"><input type="checkbox" checked> Deluxe Edition</label></li>
-                    <li><label class="filter-check"><input type="checkbox"> Limited Edition</label></li>
-                    <li><label class="filter-check"><input type="checkbox"> Restoration Kits</label></li>
+                <ul class="filter-list" id="categoryFilters">
+                    <li><label class="filter-check"><input type="checkbox" value="classic" checked> Springlock Classic</label></li>
+                    <li><label class="filter-check"><input type="checkbox" value="deluxe" checked> Deluxe Edition</label></li>
+                    <li><label class="filter-check"><input type="checkbox" value="limited"> Limited Edition</label></li>
+                    <li><label class="filter-check"><input type="checkbox" value="restoration"> Restoration Kits</label></li>
                 </ul>
             </div>
 
             <div class="filter-block">
                 <h3 class="filter-title">Цена, ₽</h3>
                 <div class="price-range">
-                    <input type="number" class="price-input" placeholder="от 15000" value="15000">
+                    <input type="number" class="price-input" id="priceMin" placeholder="от 15000" value="15000">
                     <span class="price-dash">—</span>
-                    <input type="number" class="price-input" placeholder="до 50000" value="50000">
+                    <input type="number" class="price-input" id="priceMax" placeholder="до 50000" value="50000">
                 </div>
             </div>
 
             <div class="filter-block">
                 <h3 class="filter-title">Рейтинг</h3>
-                <ul class="filter-list">
-                    <li><label class="filter-check"><input type="radio" name="rating" checked> Любой</label></li>
-                    <li><label class="filter-check stars-filter"><input type="radio" name="rating"> ★★★★☆ <span>от 4</span></label></li>
-                    <li><label class="filter-check stars-filter"><input type="radio" name="rating"> ★★★★★ <span>5</span></label></li>
+                <ul class="filter-list" id="ratingFilters">
+                    <li><label class="filter-check"><input type="radio" name="rating" value="any" checked> Любой</label></li>
+                    <li><label class="filter-check stars-filter"><input type="radio" name="rating" value="4"> ★★★★☆ <span>от 4</span></label></li>
+                    <li><label class="filter-check stars-filter"><input type="radio" name="rating" value="5"> ★★★★★ <span>5</span></label></li>
                 </ul>
             </div>
 
             <div class="filter-block">
                 <label class="filter-check toggle-label">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="inStockOnly" checked>
                     <span class="toggle-switch"></span>
                     Только в наличии
                 </label>
             </div>
 
-            <button class="filter-apply">Применить фильтры</button>
-            <button class="filter-reset">Сбросить</button>
+            <button class="filter-apply" id="applyFiltersBtn">Применить фильтры</button>
+            <button class="filter-reset" id="resetFiltersBtn">Сбросить</button>
         </aside>
 
         <!-- Сетка товаров -->
@@ -382,14 +382,16 @@
     </div>
 
     <!-- Пагинация -->
-    <div class="pagination">
-        <button class="page-btn prev" disabled>← Назад</button>
-        <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">3</button>
-        <span class="page-dots">...</span>
-        <button class="page-btn">8</button>
-        <button class="page-btn next">Вперёд →</button>
+    <div class="pagination" id="pagination">
+        <button class="page-btn prev" id="prevPageBtn" disabled>← Назад</button>
+        <span id="pageNumbers">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-dots">...</span>
+            <button class="page-btn">8</button>
+        </span>
+        <button class="page-btn next" id="nextPageBtn">Вперёд →</button>
     </div>
 
     <!-- Футер -->
@@ -399,9 +401,7 @@
             <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
         </div>
     </footer>
-<<<<<<< HEAD
+
     <script src="catalog.js"></script>
-=======
->>>>>>> f061340f0b7efa5cf92bf3cddb7ee2f2003a0e08
 </body>
 </html>
