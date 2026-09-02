@@ -312,7 +312,7 @@ body {
     transition: all 0.2s;
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
-    width: 120px;
+    min-width: 120px;
 }
 
 .action-btn:hover {
@@ -445,6 +445,61 @@ body {
     opacity: 0.8;
 }
 
+.purchase-item {
+    display: grid;
+    grid-template-columns: 28px 80px 1fr auto;   /* добавили колонку под чекбокс */
+    gap: 16px;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(123, 44, 191, 0.15);
+    transition: all 0.3s;
+}
+
+.item-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.item-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #9D4EDD;
+    cursor: pointer;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 16px 0 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.select-all-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 2px solid #7B2CBF;
+    color: #C77DFF;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.select-all-btn:hover {
+    background: rgba(123, 44, 191, 0.2);
+    color: #fff;
+}
+
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 900px) {
     .purchase-layout {
@@ -486,7 +541,7 @@ body {
     }
 
     .purchase-actions {
-        grid-column: span 2;
+        grid-column: span 3;
         flex-direction: row;
         justify-content: flex-start;
         gap: 10px;

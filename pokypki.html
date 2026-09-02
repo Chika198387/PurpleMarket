@@ -35,6 +35,7 @@
     <h1 class="page-title">
         Мои покупки
         <span class="item-count-text">(3 заказа)</span>
+        <button class="select-all-btn" id="selectAllBtn">☑️ Выбрать все</button>
     </h1>
 
     <!-- ===== ОСНОВНАЯ СЕТКА (аналогично корзине) ===== -->
@@ -43,6 +44,9 @@
         <div class="purchase-list">
             <!-- Покупка 1 -->
             <div class="purchase-item">
+                <label class="item-checkbox-wrap">
+                    <input type="checkbox" class="item-checkbox"/>
+                </label>
                 <div class="item-image">
                     <img class="img" src="https://avatars.mds.yandex.net/i?id=3c8444136133804bf10d3eeb27ead9ef_l-4120546-images-thumbs&n=13" alt="Spring Bonnie" />
                 </div>
@@ -63,6 +67,9 @@
 
             <!-- Покупка 2 -->
             <div class="purchase-item">
+                <label class="item-checkbox-wrap">
+                    <input type="checkbox" class="item-checkbox"/>
+                </label>
                 <div class="item-image">
                     <img class="img" src="https://i.ytimg.com/vi/x2kyxXucwGw/maxresdefault.jpg" alt="Springtrap" />
                 </div>
@@ -83,6 +90,9 @@
 
             <!-- Покупка 3 -->
             <div class="purchase-item">
+                <label class="item-checkbox-wrap">
+                    <input type="checkbox" class="item-checkbox"/>
+                </label>
                 <div class="item-image">
                     <img class="img" src="https://i.pinimg.com/originals/de/61/45/de6145ea5c075a3973337f6daa664766.png" alt="Fredbear" />
                 </div>
@@ -111,17 +121,17 @@
             </div>
             <div class="summary-row">
                 <span>Потрачено</span>
-                <span class="summary-value">89 970 ₽</span>
+                <span class="summary-value" id="stat-total-spent">89 970 ₽</span>
             </div>
             <div class="summary-row">
                 <span>Доставлено</span>
-                <span>2</span>
+                <span id="stat-delivered">2</span>
             </div>
             <div class="summary-row">
                 <span>В пути</span>
-                <span>1</span>
+                <span id="stat-in-transit">1</span>
             </div>
-            <button class="checkout-btn" onclick="alert('Чек отправлен на почту')">📄 Скачать чек</button>
+            <button class="checkout-btn">📄 Скачать чек</button>
             <a href="catalog.html" class="continue-shopping">← Продолжить покупки</a>
         </aside>
     </div>
@@ -133,5 +143,10 @@
             <p class="footer-warning">⚠ Все механизмы протестированы. Соблюдайте технику безопасности.</p>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="pokypki.js"></script>
+    <script src="pokypki.js"></script>
 </body>
 </html>
