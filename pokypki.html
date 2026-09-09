@@ -10,10 +10,16 @@
     <link rel="stylesheet" href="pokypki.css" />
 </head>
 <body>
-    <!-- ===== ХЕДЕР (как на всех страницах) ===== -->
+    <!-- ===== ХЕДЕР ===== -->
     <div class="header">
         <h1 class="logo">Purple Market</h1>
-        <input class="search" type="text" placeholder="Найти костюм..." />
+        <div class="search-wrap">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input class="search" type="text" placeholder="Найти костюм..." />
+        </div>
         <div class="links">
             <a class="a" href="index.html">Главная</a>
             <a class="a" href="catalog.html">Каталог</a>
@@ -38,14 +44,14 @@
         <button class="select-all-btn" id="selectAllBtn">☑️ Выбрать все</button>
     </h1>
 
-    <!-- ===== ОСНОВНАЯ СЕТКА (аналогично корзине) ===== -->
+    <!-- ===== ОСНОВНАЯ СЕТКА ===== -->
     <div class="purchase-layout">
         <!-- Список покупок -->
         <div class="purchase-list">
             <!-- Покупка 1 -->
             <div class="purchase-item">
                 <label class="item-checkbox-wrap">
-                    <input type="checkbox" class="item-checkbox"/>
+                    <input type="checkbox" class="item-checkbox" />
                 </label>
                 <div class="item-image">
                     <img class="img" src="https://avatars.mds.yandex.net/i?id=3c8444136133804bf10d3eeb27ead9ef_l-4120546-images-thumbs&n=13" alt="Spring Bonnie" />
@@ -68,7 +74,7 @@
             <!-- Покупка 2 -->
             <div class="purchase-item">
                 <label class="item-checkbox-wrap">
-                    <input type="checkbox" class="item-checkbox"/>
+                    <input type="checkbox" class="item-checkbox" />
                 </label>
                 <div class="item-image">
                     <img class="img" src="https://i.ytimg.com/vi/x2kyxXucwGw/maxresdefault.jpg" alt="Springtrap" />
@@ -91,7 +97,7 @@
             <!-- Покупка 3 -->
             <div class="purchase-item">
                 <label class="item-checkbox-wrap">
-                    <input type="checkbox" class="item-checkbox"/>
+                    <input type="checkbox" class="item-checkbox" />
                 </label>
                 <div class="item-image">
                     <img class="img" src="https://i.pinimg.com/originals/de/61/45/de6145ea5c075a3973337f6daa664766.png" alt="Fredbear" />
@@ -116,20 +122,20 @@
         <aside class="purchase-summary">
             <div class="summary-title">💰 Статистика</div>
             <div class="summary-row">
-                <span>Всего заказов</span>
-                <span>3</span>
+                <span>Выбрано заказов</span>
+                <span id="stat-selected-count">0</span>
             </div>
             <div class="summary-row">
                 <span>Потрачено</span>
-                <span class="summary-value" id="stat-total-spent">89 970 ₽</span>
+                <span class="summary-value" id="stat-total-spent">0 ₽</span>
             </div>
             <div class="summary-row">
                 <span>Доставлено</span>
-                <span id="stat-delivered">2</span>
+                <span id="stat-delivered">0</span>
             </div>
             <div class="summary-row">
                 <span>В пути</span>
-                <span id="stat-in-transit">1</span>
+                <span id="stat-in-transit">0</span>
             </div>
             <button class="checkout-btn">📄 Скачать чек</button>
             <a href="catalog.html" class="continue-shopping">← Продолжить покупки</a>
@@ -146,7 +152,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="pokypki.js"></script>
     <script src="pokypki.js"></script>
 </body>
 </html>

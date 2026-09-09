@@ -280,15 +280,193 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ===== КНОПКА "ПОДРОБНЕЕ" ДЛЯ ЗАКАЗОВ =====
-    const detailLinks = document.querySelectorAll('.order-details-link');
-    detailLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const orderCard = this.closest('.order-card');
-            const orderNumber = orderCard.querySelector('.order-number')?.textContent || 'Заказ';
-            showNotification(`Открываю детали заказа ${orderNumber}`, 'success');
-        });
+// ===== МОДАЛЬНОЕ ОКНО С ДЕТАЛЯМИ ЗАКАЗА =====
+function showOrderModal(orderCard) {
+    const oldModal = document.querySelector('.order-modal-overlay');
+    if (oldModal) oldModal.remove();
+
+    const orderNumber = orderCard.querySelector('.order-number')?.textContent || 'Заказ';
+    const orderDate = orderCard.querySelector('.order-date')?.textContent || '';
+    const statusEl = orderCard.querySelector('.order-status');
+    const statusText = statusEl?.textContent || '';
+    const statusClass = statusEl?.className.replace('order-status', '').trim() || '';
+    const orderTotal = orderCard.querySelector('.order-total')?.textContent || '';
+
+    const items = Array.from(orderCard.querySelectorAll('.order-item')).map(el => el.textContent);
+
+    const statusColors = {
+        delivered: { bg: 'rgba(0, 212, 170, 0.15)', color: '#00D4AA' },
+        processing: { bg: 'rgba(255, 179, 71, 0.15)', color: '#FFB347' },
+        cancelled: { bg: 'rgba(255, 59, 92, 0.15)', color: '#FF3B5C' }
+    };
+    const statusStyle = statusColors[statusClass] || { bg: 'rgba(123, 44, 191, 0.15)', color: '#C77DFF' };
+
+    const overlay = document.createElement('div');
+    overlay.className = 'order-modal-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        animation: fadeIn 0.3s ease;
+    `;
+
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.style.cssText = `
+        background: linear-gradient(145deg, #1A0533, #2D1040);
+        border: 1px solid rgba(123, 44, 191, 0.3);
+        border-radius: 24px;
+        padding: 32px;
+        max-width: 460px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        animation: slideUp 0.4s ease;
+        color: #E0D6F5;
+    `;
+
+    const itemsHTML = items.map(item => `
+        <div style="
+            background: rgba(123, 44, 191, 0.12);
+            border: 1px solid rgba(123, 44, 191, 0.25);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #E0D6F5;
+        ">${item}</div>
+    `).join('');
+
+    modal.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+                <h2 style="font-size: 20px; color: #fff; margin: 0 0 6px;">${orderNumber}</h2>
+                <span style="font-size: 13px; color: #9D4EDD;">${orderDate}</span>
+            </div>
+            <button class="order-modal-close" style="
+                background: none;
+                border: none;
+                color: #9D4EDD;
+                font-size: 32px;
+                cursor: pointer;
+                transition: color 0.3s;
+                line-height: 1;
+            ">&times;</button>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <span style="
+                display: inline-block;
+                padding: 5px 14px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                background: ${statusStyle.bg};
+                color: ${statusStyle.color};
+            ">${statusText}</span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <p style="font-size: 13px; font-weight: 600; color: #C77DFF; margin-bottom: 10px;">Состав заказа</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${itemsHTML}
+            </div>
+        </div>
+
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(123, 44, 191, 0.2);
+            margin-bottom: 24px;
+        ">
+            <span style="font-size: 14px; color: #C9B8E8;">Итого</span>
+            <span style="font-size: 22px; font-weight: 800; color: #FFD166;">${orderTotal}</span>
+        </div>
+
+        <button class="order-modal-close-btn" style="
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #7B2CBF;
+            background: transparent;
+            color: #C77DFF;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        ">Закрыть</button>
+    `;
+
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    // Анимации (создаются один раз)
+    if (!document.querySelector('#order-modal-anim-styles')) {
+        const style = document.createElement('style');
+        style.id = 'order-modal-anim-styles';
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateY(30px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function closeModal() {
+        overlay.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => overlay.remove(), 300);
+    }
+
+    overlay.querySelector('.order-modal-close').addEventListener('click', closeModal);
+    overlay.querySelector('.order-modal-close-btn').addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
     });
+
+    const closeBtn = overlay.querySelector('.order-modal-close-btn');
+    closeBtn.addEventListener('mouseenter', function() {
+        this.style.background = 'rgba(123, 44, 191, 0.2)';
+        this.style.color = '#fff';
+    });
+    closeBtn.addEventListener('mouseleave', function() {
+        this.style.background = 'transparent';
+        this.style.color = '#C77DFF';
+    });
+}
+
+// ===== КНОПКА "ПОДРОБНЕЕ" ДЛЯ ЗАКАЗОВ =====
+const detailLinks = document.querySelectorAll('.order-details-link');
+detailLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const orderCard = this.closest('.order-card');
+        showOrderModal(orderCard);
+    });
+});
 
     // ===== ПОИСК (ХЕДЕР) =====
     const searchInput = document.querySelector('.search');

@@ -1,7 +1,7 @@
 // pokypki.js
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     // ===== КНОПКА "ПОВТОРИТЬ" =====
     const repeatBtns = document.querySelectorAll('.repeat-btn');
     repeatBtns.forEach(btn => {
@@ -9,17 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const item = this.closest('.purchase-item');
             const itemName = item.querySelector('.item-name').textContent;
             const itemPrice = item.querySelector('.item-price').textContent;
-            
-            // Анимация нажатия
+
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
             }, 150);
-            
-            // Показываем уведомление
+
             showNotification(`🔄 "${itemName}" добавлен в корзину за ${itemPrice}`, 'success');
-            
-            // Обновляем бейдж корзины
             updateCartBadge(1);
         });
     });
@@ -30,25 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             const item = this.closest('.purchase-item');
             const itemName = item.querySelector('.item-name').textContent;
-            
-            // Анимация нажатия
+
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
             }, 150);
-            
-            // Создаём модальное окно для отзыва
-            showReviewModal(itemName);
+
+            showReviewModal(itemName, this);
         });
     });
 
     // ===== МОДАЛЬНОЕ ОКНО ДЛЯ ОТЗЫВА =====
-    function showReviewModal(itemName) {
-        // Удаляем старое модальное окно, если есть
+    function showReviewModal(itemName, triggerBtn) {
         const oldModal = document.querySelector('.review-modal-overlay');
         if (oldModal) oldModal.remove();
-        
-        // Создаём оверлей
+
         const overlay = document.createElement('div');
         overlay.className = 'review-modal-overlay';
         overlay.style.cssText = `
@@ -66,8 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             z-index: 10000;
             animation: fadeIn 0.3s ease;
         `;
-        
-        // Создаём модальное окно
+
         const modal = document.createElement('div');
         modal.className = 'review-modal';
         modal.style.cssText = `
@@ -83,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             animation: slideUp 0.4s ease;
             color: #E0D6F5;
         `;
-        
+
         modal.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="font-size: 22px; color: #fff; margin: 0;">✍️ Отзыв о товаре</h2>
@@ -98,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ">&times;</button>
             </div>
             <p style="color: #C77DFF; margin-bottom: 20px; font-size: 14px;">Товар: <strong style="color: #fff;">${itemName}</strong></p>
-            
+
             <div style="margin-bottom: 20px;">
                 <label style="display: block; font-size: 13px; font-weight: 600; color: #C77DFF; margin-bottom: 8px;">Оценка</label>
                 <div class="rating-stars" style="display: flex; gap: 8px; font-size: 32px; cursor: pointer;">
@@ -109,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span data-rating="5" style="color: #4A2A5A; transition: color 0.2s;">★</span>
                 </div>
             </div>
-            
+
             <div style="margin-bottom: 20px;">
                 <label style="display: block; font-size: 13px; font-weight: 600; color: #C77DFF; margin-bottom: 8px;">Текст отзыва</label>
                 <textarea class="review-text" placeholder="Поделитесь впечатлениями о товаре..." style="
@@ -126,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     transition: all 0.3s;
                 "></textarea>
             </div>
-            
+
             <div style="display: flex; gap: 12px; justify-content: flex-end;">
                 <button class="cancel-review" style="
                     padding: 10px 24px;
@@ -152,11 +143,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 ">Отправить</button>
             </div>
         `;
-        
+
         overlay.appendChild(modal);
         document.body.appendChild(overlay);
-        
-        // Добавляем анимации
+
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeIn {
@@ -169,25 +159,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         `;
         document.head.appendChild(style);
-        
-        // Закрытие модального окна
+
         function closeModal() {
             overlay.style.animation = 'fadeOut 0.3s ease forwards';
             setTimeout(() => overlay.remove(), 300);
         }
-        
+
         overlay.querySelector('.modal-close').addEventListener('click', closeModal);
         overlay.querySelector('.cancel-review').addEventListener('click', closeModal);
-        
-        // Закрытие по клику на оверлей
+
         overlay.addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
-        
-        // Звезды рейтинга
+
         const stars = overlay.querySelectorAll('.rating-stars span');
         let selectedRating = 0;
-        
+
         stars.forEach(star => {
             star.addEventListener('mouseenter', function() {
                 const rating = parseInt(this.dataset.rating);
@@ -196,14 +183,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     s.style.color = r <= rating ? '#FFD166' : '#4A2A5A';
                 });
             });
-            
+
             star.addEventListener('mouseleave', function() {
                 stars.forEach(s => {
                     const r = parseInt(s.dataset.rating);
                     s.style.color = r <= selectedRating ? '#FFD166' : '#4A2A5A';
                 });
             });
-            
+
             star.addEventListener('click', function() {
                 selectedRating = parseInt(this.dataset.rating);
                 stars.forEach(s => {
@@ -212,36 +199,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         });
-        
-        // Отправка отзыва
+
         overlay.querySelector('.submit-review').addEventListener('click', function() {
             const reviewText = overlay.querySelector('.review-text').value.trim();
-            
+
             if (selectedRating === 0) {
                 showNotification('⚠️ Пожалуйста, поставьте оценку!', 'warning');
                 return;
             }
-            
+
             if (!reviewText) {
                 showNotification('⚠️ Напишите текст отзыва!', 'warning');
                 return;
             }
-            
-            // Имитация отправки
+
             this.textContent = '⏳ Отправка...';
             this.disabled = true;
-            
+
             setTimeout(() => {
                 closeModal();
                 showNotification(`✅ Спасибо за отзыв на "${itemName}"! Оценка: ${selectedRating}★`, 'success');
-                
-                // Делаем кнопку отзыва недоступной
-                const btn = document.querySelector(`.review-btn`);
-                if (btn) {
-                    btn.textContent = '✅ Отзыв отправлен';
-                    btn.disabled = true;
-                    btn.style.opacity = '0.6';
-                    btn.style.cursor = 'default';
+
+                if (triggerBtn) {
+                    triggerBtn.textContent = '✅ Отзыв отправлен';
+                    triggerBtn.disabled = true;
+                    triggerBtn.style.opacity = '0.6';
+                    triggerBtn.style.cursor = 'default';
                 }
             }, 1000);
         });
@@ -368,8 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let current = parseInt(badge.textContent) || 0;
             current += increment;
             badge.textContent = current;
-            
-            // Анимация бейджа
+
             badge.style.transform = 'scale(1.4)';
             badge.style.transition = 'transform 0.2s';
             setTimeout(() => {
@@ -378,284 +360,211 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ===== КНОПКА "СКАЧАТЬ ЧЕК" =====
-// ===== ГЕНЕРАЦИЯ PDF ЧЕКА =====
-function generateReceiptPDF() {
-    return new Promise((resolve, reject) => {
-        const receiptContainer = document.createElement('div');
-        receiptContainer.style.cssText = `
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 700px;
-            padding: 40px;
-            background: #ffffff;
-            color: #1a0533;
-            font-family: 'Montserrat', sans-serif;
-        `;
+    // ===== СТАТИСТИКА ПО ВЫБРАННЫМ ТОВАРАМ =====
+    function updateSummaryStats() {
+        const allItems = document.querySelectorAll('.purchase-item');
+        const selectedItems = Array.from(allItems).filter(
+            item => item.querySelector('.item-checkbox')?.checked
+        );
 
-        const orderDate = new Date().toLocaleDateString('ru-RU');
-
-        let itemsHTML = '';
-        document.querySelectorAll('.purchase-item').forEach((item, index) => {
-            const name = item.querySelector('.item-name').textContent;
-            const price = item.querySelector('.item-price').textContent;
-            const date = item.querySelector('.purchase-date').textContent.replace('📅', '').trim();
-            const status = item.querySelector('.purchase-status').textContent.replace('✅', '').trim();
-            itemsHTML += `
-                <tr>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${index + 1}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${name}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${date}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${status}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;text-align:right;">${price}</td>
-                </tr>
-            `;
-        });
-
-        let summaryHTML = '';
-        document.querySelectorAll('.summary-row').forEach(row => {
-            const spans = row.querySelectorAll('span');
-            if (spans.length === 2) {
-                summaryHTML += `
-                    <tr>
-                        <td style="padding:6px 8px;">${spans[0].textContent}</td>
-                        <td style="padding:6px 8px;text-align:right;font-weight:700;">${spans[1].textContent}</td>
-                    </tr>
-                `;
-            }
-        });
-
-        receiptContainer.innerHTML = `
-            <div style="text-align:center;margin-bottom:30px;">
-                <h1 style="font-size:28px;margin:0;color:#7B2CBF;">Purple Market</h1>
-                <p style="margin:6px 0 0;color:#666;font-size:13px;">Чек по заказам от ${orderDate}</p>
-            </div>
-            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:13px;">
-                <thead>
-                    <tr style="background:#f0e6fa;">
-                        <th style="padding:10px 8px;text-align:left;">#</th>
-                        <th style="padding:10px 8px;text-align:left;">Товар</th>
-                        <th style="padding:10px 8px;text-align:left;">Дата</th>
-                        <th style="padding:10px 8px;text-align:left;">Статус</th>
-                        <th style="padding:10px 8px;text-align:right;">Цена</th>
-                    </tr>
-                </thead>
-                <tbody>${itemsHTML}</tbody>
-            </table>
-            <table style="width:100%;border-collapse:collapse;font-size:14px;border-top:2px solid #7B2CBF;padding-top:10px;">
-                ${summaryHTML}
-            </table>
-            <p style="margin-top:30px;font-size:11px;color:#999;text-align:center;">
-                © 2025 Purple Market — пружинные костюмы из вселенной FNAF
-            </p>
-        `;
-
-        document.body.appendChild(receiptContainer);
-
-        html2canvas(receiptContainer, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
-            const { jsPDF } = window.jspdf;
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const imgWidth = pageWidth - 20;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-            pdf.save(`Purple_Market_Chek_${Date.now()}.pdf`);
-            receiptContainer.remove();
-            resolve();
-        }).catch(err => {
-            receiptContainer.remove();
-            reject(err);
-        });
-    });
-}
-
-// ===== КНОПКА "СКАЧАТЬ ЧЕК" =====
-const checkoutBtn = document.querySelector('.checkout-btn');
-if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', function() {
-        this.textContent = '⏳ Генерация...';
-        this.disabled = true;
-
-// ===== ОБНОВЛЕНИЕ СТАТИСТИКИ ПО ВЫБРАННЫМ ТОВАРАМ =====
-function updateSummaryStats() {
-    const allItems = document.querySelectorAll('.purchase-item');
-    const selectedItems = Array.from(allItems).filter(
-        item => item.querySelector('.item-checkbox')?.checked
-    );
-
-    let totalSum = 0;
-    let deliveredCount = 0;
-    let inTransitCount = 0;
-
-    selectedItems.forEach(item => {
-        const priceText = item.querySelector('.item-price').textContent;
-        const priceNum = parseInt(priceText.replace(/[^\d]/g, '')) || 0;
-        totalSum += priceNum;
-
-        const statusEl = item.querySelector('.purchase-status');
-        if (statusEl && statusEl.classList.contains('status-delivered')) {
-            deliveredCount++;
-        } else {
-            inTransitCount++;
-        }
-    });
-
-    const countEl = document.getElementById('stat-selected-count');
-    const totalEl = document.getElementById('stat-total-spent');
-    const deliveredEl = document.getElementById('stat-delivered');
-    const transitEl = document.getElementById('stat-in-transit');
-
-    if (countEl) countEl.textContent = selectedItems.length;
-    if (totalEl) totalEl.textContent = `${totalSum.toLocaleString('ru-RU')} ₽`;
-    if (deliveredEl) deliveredEl.textContent = deliveredCount;
-    if (transitEl) transitEl.textContent = inTransitCount;
-}
-
-// Слушаем изменение каждого чекбокса
-document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', updateSummaryStats);
-});
-
-// Считаем статистику сразу при загрузке страницы
-updateSummaryStats();
-
-        // ===== ГЕНЕРАЦИЯ PDF ЧЕКА (по выбранным товарам) =====
-function generateReceiptPDF() {
-    return new Promise((resolve, reject) => {
-        const selectedItems = Array.from(document.querySelectorAll('.purchase-item'))
-            .filter(item => item.querySelector('.item-checkbox')?.checked);
-
-        if (selectedItems.length === 0) {
-            reject(new Error('no-selection'));
-            return;
-        }
-
-        const receiptContainer = document.createElement('div');
-        receiptContainer.style.cssText = `
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 700px;
-            padding: 40px;
-            background: #ffffff;
-            color: #1a0533;
-            font-family: 'Montserrat', sans-serif;
-        `;
-
-        const orderDate = new Date().toLocaleDateString('ru-RU');
-
-        let itemsHTML = '';
         let totalSum = 0;
+        let deliveredCount = 0;
+        let inTransitCount = 0;
 
-        selectedItems.forEach((item, index) => {
-            const name = item.querySelector('.item-name').textContent;
+        selectedItems.forEach(item => {
             const priceText = item.querySelector('.item-price').textContent;
-            const date = item.querySelector('.purchase-date').textContent.replace('📅', '').trim();
-            const status = item.querySelector('.purchase-status').textContent.replace('✅', '').trim();
-
             const priceNum = parseInt(priceText.replace(/[^\d]/g, '')) || 0;
             totalSum += priceNum;
 
-            itemsHTML += `
-                <tr>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${index + 1}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${name}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${date}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${status}</td>
-                    <td style="padding:10px 8px;border-bottom:1px solid #ddd;text-align:right;">${priceText}</td>
-                </tr>
+            const statusEl = item.querySelector('.purchase-status');
+            if (statusEl && statusEl.classList.contains('status-delivered')) {
+                deliveredCount++;
+            } else {
+                inTransitCount++;
+            }
+        });
+
+        const countEl = document.getElementById('stat-selected-count');
+        const totalEl = document.getElementById('stat-total-spent');
+        const deliveredEl = document.getElementById('stat-delivered');
+        const transitEl = document.getElementById('stat-in-transit');
+
+        if (countEl) countEl.textContent = selectedItems.length;
+        if (totalEl) totalEl.textContent = `${totalSum.toLocaleString('ru-RU')} ₽`;
+        if (deliveredEl) deliveredEl.textContent = deliveredCount;
+        if (transitEl) transitEl.textContent = inTransitCount;
+    }
+
+    // ===== ГЕНЕРАЦИЯ PDF ЧЕКА (по выбранным товарам, ускоренная) =====
+    function generateReceiptPDF() {
+        return new Promise((resolve, reject) => {
+            const selectedItems = Array.from(document.querySelectorAll('.purchase-item'))
+                .filter(item => item.querySelector('.item-checkbox')?.checked);
+
+            if (selectedItems.length === 0) {
+                reject(new Error('no-selection'));
+                return;
+            }
+
+            const receiptContainer = document.createElement('div');
+            receiptContainer.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: -9999px;
+                width: 700px;
+                padding: 40px;
+                background: #ffffff;
+                color: #1a0533;
+                font-family: Arial, Helvetica, sans-serif;
             `;
-        });
 
-        receiptContainer.innerHTML = `
-            <div style="text-align:center;margin-bottom:30px;">
-                <h1 style="font-size:28px;margin:0;color:#7B2CBF;">Purple Market</h1>
-                <p style="margin:6px 0 0;color:#666;font-size:13px;">Чек по выбранным заказам от ${orderDate}</p>
-            </div>
-            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:13px;">
-                <thead>
-                    <tr style="background:#f0e6fa;">
-                        <th style="padding:10px 8px;text-align:left;">#</th>
-                        <th style="padding:10px 8px;text-align:left;">Товар</th>
-                        <th style="padding:10px 8px;text-align:left;">Дата</th>
-                        <th style="padding:10px 8px;text-align:left;">Статус</th>
-                        <th style="padding:10px 8px;text-align:right;">Цена</th>
+            const orderDate = new Date().toLocaleDateString('ru-RU');
+
+            let itemsHTML = '';
+            let totalSum = 0;
+
+            selectedItems.forEach((item, index) => {
+                const name = item.querySelector('.item-name').textContent;
+                const priceText = item.querySelector('.item-price').textContent;
+                const date = item.querySelector('.purchase-date').textContent.replace('📅', '').trim();
+                const status = item.querySelector('.purchase-status').textContent.replace('✅', '').trim();
+
+                const priceNum = parseInt(priceText.replace(/[^\d]/g, '')) || 0;
+                totalSum += priceNum;
+
+                itemsHTML += `
+                    <tr>
+                        <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${index + 1}</td>
+                        <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${name}</td>
+                        <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${date}</td>
+                        <td style="padding:10px 8px;border-bottom:1px solid #ddd;">${status}</td>
+                        <td style="padding:10px 8px;border-bottom:1px solid #ddd;text-align:right;">${priceText}</td>
                     </tr>
-                </thead>
-                <tbody>${itemsHTML}</tbody>
-            </table>
-            <table style="width:100%;border-collapse:collapse;font-size:14px;border-top:2px solid #7B2CBF;padding-top:10px;">
-                <tr>
-                    <td style="padding:6px 8px;">Выбрано товаров</td>
-                    <td style="padding:6px 8px;text-align:right;font-weight:700;">${selectedItems.length}</td>
-                </tr>
-                <tr>
-                    <td style="padding:6px 8px;">Итого</td>
-                    <td style="padding:6px 8px;text-align:right;font-weight:700;">${totalSum.toLocaleString('ru-RU')} ₽</td>
-                </tr>
-            </table>
-            <p style="margin-top:30px;font-size:11px;color:#999;text-align:center;">
-                © 2025 Purple Market — пружинные костюмы из вселенной FNAF
-            </p>
-        `;
+                `;
+            });
 
-        document.body.appendChild(receiptContainer);
+            receiptContainer.innerHTML = `
+                <div style="text-align:center;margin-bottom:30px;">
+                    <h1 style="font-size:28px;margin:0;color:#7B2CBF;">Purple Market</h1>
+                    <p style="margin:6px 0 0;color:#666;font-size:13px;">Чек по выбранным заказам от ${orderDate}</p>
+                </div>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:13px;">
+                    <thead>
+                        <tr style="background:#f0e6fa;">
+                            <th style="padding:10px 8px;text-align:left;">#</th>
+                            <th style="padding:10px 8px;text-align:left;">Товар</th>
+                            <th style="padding:10px 8px;text-align:left;">Дата</th>
+                            <th style="padding:10px 8px;text-align:left;">Статус</th>
+                            <th style="padding:10px 8px;text-align:right;">Цена</th>
+                        </tr>
+                    </thead>
+                    <tbody>${itemsHTML}</tbody>
+                </table>
+                <table style="width:100%;border-collapse:collapse;font-size:14px;border-top:2px solid #7B2CBF;padding-top:10px;">
+                    <tr>
+                        <td style="padding:6px 8px;">Выбрано товаров</td>
+                        <td style="padding:6px 8px;text-align:right;font-weight:700;">${selectedItems.length}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:6px 8px;">Итого</td>
+                        <td style="padding:6px 8px;text-align:right;font-weight:700;">${totalSum.toLocaleString('ru-RU')} ₽</td>
+                    </tr>
+                </table>
+                <p style="margin-top:30px;font-size:11px;color:#999;text-align:center;">
+                    © 2025 Purple Market — пружинные костюмы из вселенной FNAF
+                </p>
+            `;
 
-        html2canvas(receiptContainer, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
-            const { jsPDF } = window.jspdf;
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const imgWidth = pageWidth - 20;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-            pdf.save(`Purple_Market_Chek_${Date.now()}.pdf`);
-            receiptContainer.remove();
-            resolve();
-        }).catch(err => {
-            receiptContainer.remove();
-            reject(err);
+            document.body.appendChild(receiptContainer);
+
+            html2canvas(receiptContainer, {
+                scale: 1,
+                backgroundColor: '#ffffff',
+                logging: false,
+                useCORS: false
+            }).then(canvas => {
+                const { jsPDF } = window.jspdf;
+                const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const imgWidth = pageWidth - 20;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
+                pdf.save(`Purple_Market_Chek_${Date.now()}.pdf`);
+                receiptContainer.remove();
+                resolve();
+            }).catch(err => {
+                receiptContainer.remove();
+                reject(err);
+            });
         });
-    });
-}
+    }
 
-// ===== КНОПКА "СКАЧАТЬ ЧЕК" =====
-const checkoutBtn = document.querySelector('.checkout-btn');
-if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', function() {
-        this.textContent = '⏳ Генерация...';
-        this.disabled = true;
+    // ===== КНОПКА "СКАЧАТЬ ЧЕК" =====
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            this.textContent = '⏳ Генерация...';
+            this.disabled = true;
 
-        generateReceiptPDF()
-            .then(() => {
-                this.textContent = '✅ Чек скачан!';
-                this.style.background = 'linear-gradient(135deg, #00D4AA, #00B894)';
+            generateReceiptPDF()
+                .then(() => {
+                    this.textContent = '✅ Чек скачан!';
+                    this.style.background = 'linear-gradient(135deg, #00D4AA, #00B894)';
 
-                showNotification('📄 Ваш чек скачан', 'success');
+                    showNotification('📄 Ваш чек скачан', 'success');
 
-                setTimeout(() => {
+                    setTimeout(() => {
+                        this.textContent = '📄 Скачать чек';
+                        this.disabled = false;
+                        this.style.background = '';
+                    }, 2000);
+                })
+                .catch(err => {
                     this.textContent = '📄 Скачать чек';
                     this.disabled = false;
-                    this.style.background = '';
-                }, 2000);
-            })
-            .catch(err => {
-                this.textContent = '📄 Скачать чек';
-                this.disabled = false;
 
-                if (err.message === 'no-selection') {
-                    showNotification('⚠️ Выберите хотя бы один товар', 'warning');
-                } else {
-                    console.error('Ошибка генерации чека:', err);
-                    showNotification('❌ Не удалось сформировать чек', 'error');
-                }
-            });
+                    if (err.message === 'no-selection') {
+                        showNotification('⚠️ Выберите хотя бы один товар', 'warning');
+                    } else {
+                        console.error('Ошибка генерации чека:', err);
+                        showNotification('❌ Не удалось сформировать чек', 'error');
+                    }
+                });
+        });
+    }
+
+    // ===== КНОПКА "ВЫБРАТЬ ВСЕ" =====
+    const selectAllBtn = document.getElementById('selectAllBtn');
+    const allCheckboxes = document.querySelectorAll('.item-checkbox');
+
+    function refreshSelectAllLabel() {
+        const allChecked = allCheckboxes.length > 0 &&
+            Array.from(allCheckboxes).every(cb => cb.checked);
+        if (selectAllBtn) {
+            selectAllBtn.textContent = allChecked ? '⬜ Снять все' : '☑️ Выбрать все';
+        }
+    }
+
+    if (selectAllBtn) {
+        selectAllBtn.addEventListener('click', function() {
+            const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+            allCheckboxes.forEach(cb => { cb.checked = !allChecked; });
+            updateSummaryStats();
+            refreshSelectAllLabel();
+        });
+    }
+
+    allCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            updateSummaryStats();
+            refreshSelectAllLabel();
+        });
     });
-}
-    });
-}
+
+    // Начальное состояние: чекбоксы пусты, статистика и кнопка "Выбрать все" — по нулям
+    updateSummaryStats();
+    refreshSelectAllLabel();
 
     // ===== ПОИСК (ХЕДЕР) =====
     const searchInput = document.querySelector('.search');
@@ -672,10 +581,9 @@ if (checkoutBtn) {
         });
     }
 
-    // ===== ПЛАВНАЯ АНИМАЦИЯ КАРТОЧЕК ПРИ НАВЕДЕНИИ (БЕЗ ФИОЛЕТОВОГО КРАЯ) =====
+    // ===== ПЛАВНАЯ АНИМАЦИЯ КАРТОЧЕК ПРИ НАВЕДЕНИИ =====
     const purchaseItems = document.querySelectorAll('.purchase-item');
     purchaseItems.forEach(item => {
-        // Устанавливаем начальные стили с плавным переходом
         item.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         item.style.transform = 'translateX(0)';
         item.style.background = 'transparent';
@@ -683,14 +591,14 @@ if (checkoutBtn) {
         item.style.boxShadow = 'none';
         item.style.padding = '16px';
         item.style.margin = '0';
-        
+
         item.addEventListener('mouseenter', function() {
             this.style.transform = 'translateX(6px) scale(1.01)';
             this.style.background = 'rgba(123, 44, 191, 0.05)';
             this.style.boxShadow = '0 6px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(123, 44, 191, 0.04)';
             this.style.borderRadius = '14px';
         });
-        
+
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateX(0) scale(1)';
             this.style.background = 'transparent';
@@ -707,7 +615,7 @@ if (checkoutBtn) {
         row.style.borderRadius = '8px';
         row.style.margin = '0';
         row.style.background = 'transparent';
-        
+
         row.addEventListener('mouseenter', function() {
             this.style.background = 'rgba(123, 44, 191, 0.08)';
             this.style.padding = '10px 14px';
@@ -715,7 +623,7 @@ if (checkoutBtn) {
             this.style.transform = 'scale(1.02)';
             this.style.boxShadow = '0 2px 12px rgba(123, 44, 191, 0.06)';
         });
-        
+
         row.addEventListener('mouseleave', function() {
             this.style.background = 'transparent';
             this.style.padding = '10px 0';
@@ -726,7 +634,7 @@ if (checkoutBtn) {
     });
 
     // ===== ПЛАВНАЯ АНИМАЦИЯ ДЛЯ КНОПОК =====
-    const allButtons = document.querySelectorAll('.action-btn, .checkout-btn, .continue-shopping');
+    const allButtons = document.querySelectorAll('.action-btn, .checkout-btn, .continue-shopping, .select-all-btn');
     allButtons.forEach(btn => {
         btn.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     });
@@ -735,16 +643,16 @@ if (checkoutBtn) {
     console.log('🟣 Purple Market — Страница "Мои покупки" загружена');
     console.log('📦 Всего покупок: 3');
 
-    // ===== ДОБАВЛЯЕМ ДОПОЛНИТЕЛЬНЫЙ ЭФФЕКТ ДЛЯ КАРТИНОК =====
+    // ===== ЭФФЕКТ ДЛЯ КАРТИНОК =====
     const itemImages = document.querySelectorAll('.item-image');
     itemImages.forEach(img => {
         img.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        
+
         img.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';
             this.style.boxShadow = '0 6px 25px rgba(123, 44, 191, 0.25)';
         });
-        
+
         img.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
             this.style.boxShadow = 'none';
@@ -752,29 +660,3 @@ if (checkoutBtn) {
     });
 
 });
-
-// ===== КНОПКА "ВЫБРАТЬ ВСЕ" =====
-const selectAllBtn = document.getElementById('selectAllBtn');
-const allCheckboxes = document.querySelectorAll('.item-checkbox');
-
-function refreshSelectAllLabel() {
-    const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
-    if (selectAllBtn) {
-        selectAllBtn.textContent = allChecked ? '⬜ Снять все' : '☑️ Выбрать все';
-    }
-}
-
-if (selectAllBtn) {
-    selectAllBtn.addEventListener('click', function() {
-        const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
-        allCheckboxes.forEach(cb => { cb.checked = !allChecked; });
-        updateSummaryStats();
-        refreshSelectAllLabel();
-    });
-}
-
-allCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', refreshSelectAllLabel);
-});
-
-refreshSelectAllLabel();

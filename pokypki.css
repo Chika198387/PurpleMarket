@@ -1,4 +1,4 @@
-/* ===== ОБЩИЕ СТИЛИ (как на всех страницах) ===== */
+/* ===== ОБЩИЕ СТИЛИ ===== */
 * {
     margin: 0;
     padding: 0;
@@ -113,17 +113,33 @@ body {
     vertical-align: middle;
 }
 
+.search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(199, 125, 255, 0.6);
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
 .search {
-    padding: 10px 16px;
+    padding: 10px 16px 10px 42px;
     border-radius: 10px;
     border: 2px solid #7B2CBF;
     background-color: rgba(123, 44, 191, 0.08);
     color: #E0D6F5;
     font-size: 15px;
     transition: all 0.3s ease;
-    min-width: 200px;
     width: 100%;
-    max-width: 1000px;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -132,6 +148,11 @@ body {
     box-shadow: 0px 0px 14px rgba(199, 125, 255, 0.5);
     border-color: #C77DFF;
     background-color: rgba(123, 44, 191, 0.15);
+}
+
+.search:focus ~ .search-icon,
+.search-wrap:focus-within .search-icon {
+    color: #C77DFF;
 }
 
 .search:hover {
@@ -180,12 +201,33 @@ body {
     display: flex;
     align-items: baseline;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .page-title .item-count-text {
     font-size: 15px;
     font-weight: 400;
     color: #9D4EDD;
+}
+
+.select-all-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 2px solid #7B2CBF;
+    color: #C77DFF;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.select-all-btn:hover {
+    background: rgba(123, 44, 191, 0.2);
+    color: #fff;
 }
 
 /* ===== ОСНОВНАЯ СЕТКА ===== */
@@ -211,7 +253,7 @@ body {
 
 .purchase-item {
     display: grid;
-    grid-template-columns: 80px 1fr auto;
+    grid-template-columns: 28px 80px 1fr auto;
     gap: 16px;
     align-items: center;
     padding-bottom: 16px;
@@ -222,6 +264,21 @@ body {
 .purchase-item:last-child {
     border-bottom: none;
     padding-bottom: 0;
+}
+
+/* ===== ЧЕКБОКС ВЫБОРА ТОВАРА ===== */
+.item-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.item-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #9D4EDD;
+    cursor: pointer;
 }
 
 /* ===== КАРТИНКА ТОВАРА ===== */
@@ -313,6 +370,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
     min-width: 120px;
+    text-align: center;
 }
 
 .action-btn:hover {
@@ -445,61 +503,6 @@ body {
     opacity: 0.8;
 }
 
-.purchase-item {
-    display: grid;
-    grid-template-columns: 28px 80px 1fr auto;   /* добавили колонку под чекбокс */
-    gap: 16px;
-    align-items: center;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(123, 44, 191, 0.15);
-    transition: all 0.3s;
-}
-
-.item-checkbox-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.item-checkbox {
-    width: 20px;
-    height: 20px;
-    accent-color: #9D4EDD;
-    cursor: pointer;
-}
-
-.page-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    margin: 16px 0 20px;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.select-all-btn {
-    margin-left: auto;
-    background: transparent;
-    border: 2px solid #7B2CBF;
-    color: #C77DFF;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    transition: all 0.2s;
-    white-space: nowrap;
-}
-
-.select-all-btn:hover {
-    background: rgba(123, 44, 191, 0.2);
-    color: #fff;
-}
-
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 900px) {
     .purchase-layout {
@@ -531,7 +534,7 @@ body {
     }
 
     .purchase-item {
-        grid-template-columns: 60px 1fr;
+        grid-template-columns: 24px 60px 1fr;
         gap: 10px;
     }
 
@@ -550,6 +553,7 @@ body {
 
     .action-btn {
         width: auto;
+        min-width: 0;
         padding: 4px 12px;
         font-size: 12px;
     }
@@ -565,7 +569,7 @@ body {
     }
 
     .purchase-item {
-        grid-template-columns: 50px 1fr;
+        grid-template-columns: 20px 50px 1fr;
     }
 
     .item-image {
