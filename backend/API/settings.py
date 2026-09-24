@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'quiz',
 ]
 
+ROOT_URLCONF = 'API.urls'
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +66,22 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True  # на время разработки
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 # ВАЖНО: кастомная модель пользователя (см. Этап 2 из нашего плана)
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -74,13 +92,14 @@ AUTH_USER_MODEL = 'accounts.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'backend_db',
+        'USER': 'backend_user',
+        'PASSWORD': 'PurpleMarket_dev_2026',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
